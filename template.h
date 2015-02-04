@@ -10,6 +10,7 @@
 #define PR0(a,n) { cout << #a << " = "; REP(_,n) cout << a[_] << ' '; cout << endl; }
 
 #define sqr(x) ((x) * (x))
+#define ll long long
 using namespace std;
 
 extern void solve();
