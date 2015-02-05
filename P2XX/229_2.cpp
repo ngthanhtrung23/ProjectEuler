@@ -20,6 +20,7 @@ bool isBad(int p) {
     if (p % 8 == 5 || p % 8 == 7) return true;
     if (p % 3 == 2) return true;
     if (p % 7 == 3 || p % 7 == 5 || p % 7 == 6) return true;
+    return false;
 }
 
 int sieve[1000111];

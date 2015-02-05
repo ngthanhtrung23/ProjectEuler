@@ -14,8 +14,18 @@
 using namespace std;
 
 const ll INF = 10 * 1000 * 1000;
+const int MN = 10111000;
 
-int sieve[INF + 10];
+int sieve[MN + 10];
+
+bool isBad(int p) {
+    if (p % 4 == 3) return true;
+    if (p % 8 == 5 || p % 8 == 7) return true;
+    if (p % 3 == 2) return true;
+    if (p % 7 == 3 || p % 7 == 5 || p % 7 == 6) return true;
+    return false;
+}
+
 
 int main() {
     ios :: sync_with_stdio(false);
@@ -23,7 +33,7 @@ int main() {
     clock_t startTime = clock();
 
     FOR(i,2,5000) if (!sieve[i]) {
-        for(int j = i*i; j <= INF; j += i)
+        for(int j = i*i; j <= MN; j += i)
             sieve[j] = i;
     }
 
