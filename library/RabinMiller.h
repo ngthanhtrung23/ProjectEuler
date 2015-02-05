@@ -1,6 +1,4 @@
 // Because of mulMod, it is slower than Java isProbablePrime when N is big
-typedef long long ll;
-
 ll mulMod(ll x, ll y, ll p) {
     if (x < 1000111000111000111LL / y) return x * y % p;
     ll mid = mulMod((x+x)%p, y>>1LL, p);
