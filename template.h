@@ -11,6 +11,8 @@
 
 #define sqr(x) ((x) * (x))
 #define ll long long
+#define TWO(X) (1LL<<(X))
+#define CONTAIN(S,X) (S & TWO(X))
 using namespace std;
 
 extern void solve();
