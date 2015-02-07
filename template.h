@@ -1,3 +1,6 @@
+#ifndef RR_TEMPLATE_H
+
+#define RR_TEMPLATE_H
 #include <bits/stdc++.h>
 
 #define FOR(i,a,b) for(int i=(a),_b=(b); i<=_b; i++)
@@ -13,6 +16,14 @@
 #define ll long long
 #define TWO(X) (1LL<<(X))
 #define CONTAIN(S,X) (S & TWO(X))
+
+// Assert with message
+#define ASSERT(b, mess) { \
+    if (!(b)) { \
+        cout << mess << endl; \
+        assert((b));\
+    } \
+}
 using namespace std;
 
 extern void solve();
@@ -27,4 +38,5 @@ int main() {
     cout << endl << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " seconds." << endl;
     return 0;
 }
+#endif
 
