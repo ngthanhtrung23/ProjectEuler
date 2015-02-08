@@ -1,66 +1,55 @@
 #include "template.h"
+#include "library/bigint.h"
 #include "library/RabinMiller.h"
 
-const ll INF = 1000000LL * 1000000 * 10000;
+const ll INF = (ll) (1e16);
+ll c[111][111];
+vector<int> primes;
+ll all;
+
+void attempt(int i, ll prod, int cnt) {
+    if (i == primes.size()) {
+        ll div = INF / prod;
+
+        if (cnt & 1) {
+            all += div * (1LL - cnt + c[cnt][2] - c[cnt][3]);
+        }
+        else {
+            all -= div * (1LL - cnt + c[cnt][2] - c[cnt][3]);
+        }
+        return ;
+    }
+
+    attempt(i+1, prod, cnt);
+    if (prod * primes[i] <= INF)
+        attempt(i+1, prod * primes[i], cnt + 1);
+}
+
 void solve() {
+    FOR(i,0,100) {
+        c[i][0] = 1;
+        FOR(j,1,i)
+            c[i][j] = c[i-1][j-1] + c[i-1][j];
+    }
     DEBUG(INF);
-    vector<int> primes;
     FOR(i,2,100) if (isPrime(i)) primes.push_back(i);
     DEBUG(primes.size());
+    PR0(primes, primes.size());
 
-    ll all = INF;
-    
-    REP(mask,TWO(25)) {
-        ll prod = 1;
-        REP(i,25) if (CONTAIN(mask,i)) prod *= primes[i];
+    all = INF;
 
-        if (__builtin_popcount(mask) & 1) all += INF / prod;
-        else all -= INF / prod;
-    }
-    cout << "DONE 0" << endl;
-    REP(ix,primes.size()) { int x = primes[ix];
-        vector<int> pp; for(auto p : primes) if (p != x) pp.push_back(p);
-        DEBUG(x);
-        REP(mask,TWO(24)) {
-            ll prod = 1;
-            REP(i,24) if (CONTAIN(mask,i)) prod *= pp[i];
-
-            if (__builtin_popcount(mask) & 1) all += INF / prod / x;
-            else all -= INF / prod / x;
-        }
-    }
-    cout << "DONE 1" << endl;
-    REP(ix,primes.size()) FOR(iy,ix+1,primes.size()-1) {
-        int x = primes[ix], y = primes[iy];
-        int xy = x * y;
-        DEBUG(x);
-        DEBUG(y);
-        vector<int> pp; for(auto p : primes) if (p != x && p != y) pp.push_back(p);
-        REP(mask,TWO(23)) {
-            ll prod = 1;
-            REP(i,23) if (CONTAIN(mask,i)) prod *= pp[i];
-
-            if (__builtin_popcount(mask) & 1) all += INF / prod / xy;
-            else all -= INF / prod / xy;
-        }
-    }
-    cout << "DONE 2" << endl;
-    REP(ix,primes.size()) FOR(iy,ix+1,primes.size()-1) FOR(iz,iy+1,primes.size()-1) {
-        int x = primes[ix], y = primes[iy], z = primes[iz];
-        int xyz = x*y*z;
-        DEBUG(x);
-        DEBUG(y);
-        DEBUG(z);
-        vector<int> pp; for(auto p : primes) if (p != x && p != y && p != z) pp.push_back(p);
-        REP(mask,TWO(22)) {
-            ll prod = 1;
-            REP(i,22) if (CONTAIN(mask,i)) prod *= pp[i];
-
-            if (__builtin_popcount(mask) & 1) all += INF / prod / xyz;
-            else all -= INF / prod / xyz;
-        }
-    }
+    attempt(0, 1, 0);
 
     DEBUG(all);
+
+//    int res = 0;
+//    FOR(i,1,INF) {
+//        int cnt = 0;
+//        for(auto p : primes)
+//            if (i % p == 0) ++cnt;
+//
+//        if (cnt >= 4) ++res;
+//    }
+//    DEBUG(res);
 }
 
