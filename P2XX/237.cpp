@@ -22,7 +22,7 @@ void solve() {
     up(6, 6); up(6, 3);
 
 //    start = (transition % (1000LL * 1000 * 1000LL * 1000 - 2LL)) * start;
-    start = (transition % 8) * start;
+    start = (transition % (1e12 - 2)) * start;
     cout << start << endl;
     cout << (start[2][0] + start[4][0]) << endl;
 }

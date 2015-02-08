@@ -7,6 +7,7 @@ struct Modulo {
     Modulo operator + (const Modulo& a) const { return Modulo((value + a.value) % MOD); }
     Modulo operator - (const Modulo& a) const { return Modulo((value - a.value + MOD) % MOD); }
     Modulo operator * (const Modulo& a) const { return Modulo((value * a.value) % MOD); }
+    bool operator == (const Modulo& a) const { return value == a.value; }
 
     void operator += (const Modulo& a) { value = (value + a.value) % MOD; }
     void operator -= (const Modulo& a) { value = (value - a.value + MOD) % MOD; }
