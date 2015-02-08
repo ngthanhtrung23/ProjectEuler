@@ -8,6 +8,10 @@ struct Modulo {
     Modulo operator - (const Modulo& a) const { return Modulo((value - a.value + MOD) % MOD); }
     Modulo operator * (const Modulo& a) const { return Modulo((value * a.value) % MOD); }
 
+    void operator += (const Modulo& a) { value = (value + a.value) % MOD; }
+    void operator -= (const Modulo& a) { value = (value - a.value + MOD) % MOD; }
+    void operator *= (const Modulo& a) { value = (value * a.value) % MOD; }
+
     friend ostream& operator << (ostream& cout, const Modulo<MOD>& x) {
         cout << x.value;
         return cout;

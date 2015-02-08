@@ -4,7 +4,7 @@
 
 const ll MOD = 1000 * 1000 * 100;
 
-#define up(j,i) transition[i-1][j-1] = transition[i-1][j-1] + 1
+#define up(j,i) transition[i-1][j-1] += 1
 
 void solve() {
     Matrix<Modulo<MOD>> start(6, 1);
