@@ -1,8 +1,8 @@
-template <size_t MOD>
+template <long long MOD>
 struct Modulo {
     long long value;
 
-    Modulo(long long val = 0) : value(val % MOD) {}
+    Modulo(long long val = 0) { value = (val % MOD + MOD) % MOD; }
 
     Modulo operator + (const Modulo& a) const { return Modulo((value + a.value) % MOD); }
     Modulo operator - (const Modulo& a) const { return Modulo((value - a.value + MOD) % MOD); }
@@ -22,4 +22,14 @@ struct Modulo {
         return cin;
     }
 };
+
+template <long long MOD>
+Modulo<MOD> power(Modulo<MOD> x, long long k) {
+    if (k == 0) return 1;
+    if (k == 1) return x;
+    auto mid = power(x * x, k >> 1);
+
+    if (k & 1) return mid * x;
+    else return mid;
+}
 
