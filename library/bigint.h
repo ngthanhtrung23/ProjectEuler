@@ -26,6 +26,7 @@ struct BigInt {
         sign = 1;
         if (v < 0)
             sign = -1, v = -v;
+        a.clear();
         for (; v > 0; v = v / base)
             a.push_back(v % base);
     }
@@ -248,7 +249,7 @@ struct BigInt {
     }
 
     friend ostream& operator<<(ostream &stream, const BigInt &v) {
-        if (v.sign == -1)
+        if (v.sign == -1 && !v.isZero())
             stream << '-';
         stream << (v.a.empty() ? 0 : v.a.back());
         for (int i = (int) v.a.size() - 2; i >= 0; --i)
